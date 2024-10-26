@@ -6,12 +6,36 @@
 #include "GameFramework/GameModeBase.h"
 #include "GameplayGameMode_Base.generated.h"
 
-/**
- * 
- */
+class ADodgeStoneGameState_Base;
+
 UCLASS()
 class DODGETHESTONE_API AGameplayGameMode_Base : public AGameModeBase
 {
 	GENERATED_BODY()
-	
+
+private:
+	// Get current game state;
+	UPROPERTY()
+	ADodgeStoneGameState_Base* gameStateDodgeStone;
+
+	// Spawn stone to world;
+	UFUNCTION()
+	void SpawnStone();
+
+protected:
+	virtual void BeginPlay() override;
+
+public:
+	// Call function SpawnStone every 5 second;
+	UFUNCTION()
+	void Process(const int& currentTime);
+	// Function for end game
+	UFUNCTION()
+	void EndGame();
+	// Function for restart game;
+	UFUNCTION()
+	void RestartGame();
+	// Function that react for died character;
+	UFUNCTION()
+	void OnCharacterDied();
 };

@@ -22,10 +22,17 @@ class DODGETHESTONE_API UDodgeTheStoneGameInstance_Base : public UGameInstance
 private:
 	UPROPERTY()
 	EGameDifficulty currentDifficalty;
+	UPROPERTY()
+	int highestScore = 0;
 
 public:
 	UFUNCTION(BlueprintCallable)
 	void SetGameDifficalty(EGameDifficulty gameDifficalty);
 	UFUNCTION(BlueprintCallable)
 	EGameDifficulty GetGameDifficalty();
+
+	UFUNCTION(BlueprintCallable)
+	void SetHighestScore(const int& value);
+	UFUNCTION(BlueprintCallable)
+	int GetHighestScore() const;
 };
