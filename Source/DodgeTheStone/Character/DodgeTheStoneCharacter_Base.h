@@ -18,6 +18,10 @@ public:
 	// Sets default values for this character's properties
 	ADodgeTheStoneCharacter_Base();
 
+	// Health component
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Health")
+	class UHealthComponent_Base* healthComponent;
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -36,4 +40,7 @@ private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	UCameraComponent* camera;
 	// ====================================================================================================== //
+
+public:
+	void CharacterDied();
 };

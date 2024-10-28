@@ -2,7 +2,10 @@
 
 
 #include "../Character/DodgeTheStoneCharacter_Base.h"
+#include "../ActorComponents/HealthComponent_Base.h"
+
 #include "Camera/CameraComponent.h"
+
 #include "GameFramework/SpringArmComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
@@ -37,6 +40,10 @@ ADodgeTheStoneCharacter_Base::ADodgeTheStoneCharacter_Base()
 	camera = CreateDefaultSubobject<UCameraComponent>(FName("Camera"));
 	camera->SetupAttachment(springArm, USpringArmComponent::SocketName);
 	camera->bUsePawnControlRotation = true;
+
+	// Create Health component
+	healthComponent = CreateDefaultSubobject<UHealthComponent_Base>("Health component");
+	Tags.Add(FName("Player"));
 }
 
 // Called when the game starts or when spawned
@@ -56,4 +63,9 @@ void ADodgeTheStoneCharacter_Base::Tick(float DeltaTime)
 void ADodgeTheStoneCharacter_Base::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
 	Super::SetupPlayerInputComponent(PlayerInputComponent);
+}
+
+void ADodgeTheStoneCharacter_Base::CharacterDied()
+{
+	Destroy();
 }

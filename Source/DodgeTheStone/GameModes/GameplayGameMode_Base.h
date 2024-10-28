@@ -7,6 +7,7 @@
 #include "GameplayGameMode_Base.generated.h"
 
 class ADodgeStoneGameState_Base;
+class ASpawner_Base;
 
 UCLASS()
 class DODGETHESTONE_API AGameplayGameMode_Base : public AGameModeBase
@@ -22,10 +23,16 @@ private:
 	UFUNCTION()
 	void SpawnStone();
 
+	UPROPERTY()
+	ASpawner_Base* spawner;
+
 protected:
 	virtual void BeginPlay() override;
 
 public:
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Spawner")
+	TSubclassOf<ASpawner_Base> spawnerClass;
+
 	// Call function SpawnStone every 5 second;
 	UFUNCTION()
 	void Process(const int& currentTime);

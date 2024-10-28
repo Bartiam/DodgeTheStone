@@ -46,5 +46,6 @@ public:
 	UFUNCTION()
 	void StartGame();
 	// Updates seconds player and send it to game mode;
+	UFUNCTION()
 	void CoreGameTimerFuntion();
 };
