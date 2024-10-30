@@ -37,4 +37,8 @@ public:
 	float GetCurrentHealth() const;
 	UFUNCTION()
 	void TakeDamageFromStone(const float damage);
+	UFUNCTION()
+	void SetDeafaultHeatlh(const int& newHealth);
+	UFUNCTION(BlueprintPure)
+	int GetDefaultHealth() const;
 };

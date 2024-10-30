@@ -5,6 +5,7 @@
 #include "../GameStates/DodgeStoneGameState_Base.h"
 #include "../PlayerStates/DodgeStonePlayerState_Base.h"
 #include "../Spawners/Spawner_Base.h"
+#include "../HUDs/DodgeTheStoneHUD_Base.h"
 
 #include "Kismet/GameplayStatics.h"
 
@@ -44,5 +45,7 @@ void AGameplayGameMode_Base::RestartGame()
 
 void AGameplayGameMode_Base::OnCharacterDied()
 {
-	
+	EndGame();
+	currentHUD = Cast<ADodgeTheStoneHUD_Base>(UGameplayStatics::GetActorOfClass(GetWorld(), ADodgeTheStoneHUD_Base::StaticClass()));
+	currentHUD->CreateGameOverWidget();
 }

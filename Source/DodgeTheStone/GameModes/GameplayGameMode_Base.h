@@ -8,6 +8,7 @@
 
 class ADodgeStoneGameState_Base;
 class ASpawner_Base;
+class ADodgeTheStoneHUD_Base;
 
 UCLASS()
 class DODGETHESTONE_API AGameplayGameMode_Base : public AGameModeBase
@@ -25,6 +26,9 @@ private:
 
 	UPROPERTY()
 	ASpawner_Base* spawner;
+
+	UPROPERTY()
+	ADodgeTheStoneHUD_Base* currentHUD;
 
 protected:
 	virtual void BeginPlay() override;

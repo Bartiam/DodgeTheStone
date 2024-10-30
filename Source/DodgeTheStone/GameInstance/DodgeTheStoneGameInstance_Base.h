@@ -28,11 +28,11 @@ private:
 public:
 	UFUNCTION(BlueprintCallable)
 	void SetGameDifficalty(EGameDifficulty gameDifficalty);
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	EGameDifficulty GetGameDifficalty();
 
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	void SetHighestScore(const int& value);
-	UFUNCTION(BlueprintCallable)
+	UFUNCTION()
 	int GetHighestScore() const;
 };

@@ -4,6 +4,7 @@
 #include "../Stones/Stone_Base.h"
 #include "../Character/DodgeTheStoneCharacter_Base.h"
 #include "../ActorComponents/HealthComponent_Base.h"
+#include "../GameInstance/DodgeTheStoneGameInstance_Base.h"
 
 #include "Components/StaticMeshComponent.h"
 #include "Components/BoxComponent.h"
@@ -31,6 +32,7 @@ void AStone_Base::BeginPlay()
 	character = Cast<ADodgeTheStoneCharacter_Base>(UGameplayStatics::GetPlayerPawn(GetWorld(), 0));
 	boxCollision->OnComponentHit.AddDynamic(this, &AStone_Base::ReflectionFromTheWallCollision);
 	SetDirectionMove();
+	DamageSettingDependingOnTheDifficulty();
 }
 
 // Called every frame
@@ -52,6 +54,9 @@ void AStone_Base::MovementStone(float deltaTime)
 void AStone_Base::SetDirectionMove()
 {
 	// Get location of character
+	if (!IsValid(character))
+		return;
+
 	FVector currentPositionOfCharacter = character->GetActorLocation();
 	// Get location of this actor
 	FVector currentPositionOfStone = GetActorLocation();
@@ -75,4 +80,22 @@ void AStone_Base::ReflectionFromTheWallCollision(UPrimitiveComponent* hitCompone
 	SetActorRotation(UKismetMathLibrary::MakeRotFromX(newDirection));
 }
 
+void AStone_Base::DamageSettingDependingOnTheDifficulty()
+{
+	auto currentGameInstance = Cast<UDodgeTheStoneGameInstance_Base>(GetGameInstance());
 
+	EGameDifficulty difficulty = currentGameInstance->GetGameDifficalty();
+
+	switch (difficulty)
+	{
+	case EGameDifficulty::EEASY:
+		damage = 25.f;
+		break;
+	case EGameDifficulty::ENORMAL:
+		damage = 50.f;
+		break;
+	case EGameDifficulty::EHARD:
+		damage = 100.f;
+		break;
+	}
+}

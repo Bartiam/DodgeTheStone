@@ -2,6 +2,9 @@
 
 
 #include "../ActorComponents/HealthComponent_Base.h"
+#include "../GameModes/GameplayGameMode_Base.h"
+
+#include "Kismet/GameplayStatics.h"
 
 // Sets default values for this component's properties
 UHealthComponent_Base::UHealthComponent_Base()
@@ -43,6 +46,18 @@ void UHealthComponent_Base::TakeDamageFromStone(const float damage)
 	if (GetCurrentHealth() <= 0.f)
 	{
 		GetOwner()->Destroy();
+		auto gameMode = Cast<AGameplayGameMode_Base>(UGameplayStatics::GetActorOfClass(GetWorld(), AGameplayGameMode_Base::StaticClass()));
+		gameMode->OnCharacterDied();
 	}
+}
+
+void UHealthComponent_Base::SetDeafaultHeatlh(const int& newHealth)
+{
+	defaultHealth = newHealth;
+}
+
+int UHealthComponent_Base::GetDefaultHealth() const
+{
+	return defaultHealth;
 }
 

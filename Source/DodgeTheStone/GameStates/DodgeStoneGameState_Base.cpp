@@ -33,7 +33,7 @@ void ADodgeStoneGameState_Base::EndGame()
 
 	// Restart game with delay
 	FTimerHandle timerToRestart;
-	GetWorldTimerManager().SetTimer(timerToRestart, this, &ADodgeStoneGameState_Base::RestartGame, 1.f, false);
+	GetWorldTimerManager().SetTimer(timerToRestart, this, &ADodgeStoneGameState_Base::RestartGame, 3.f, false);
 }
 
 void ADodgeStoneGameState_Base::RestartGame()

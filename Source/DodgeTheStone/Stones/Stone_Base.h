@@ -25,7 +25,7 @@ public:
 	class UBoxComponent* boxCollision;
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	float damage = 50.f;
+	float damage;
 
 	UPROPERTY()
 	class ADodgeTheStoneCharacter_Base* character;
@@ -46,5 +46,7 @@ private:
 	UFUNCTION()
 	void ReflectionFromTheWallCollision(UPrimitiveComponent* hitComponent, AActor* otherActor, 
 		UPrimitiveComponent* otherComponent, FVector normalImpuls, const FHitResult& sweepResult);
+	UFUNCTION()
+	void DamageSettingDependingOnTheDifficulty();
 
 };
